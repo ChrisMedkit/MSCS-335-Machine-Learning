@@ -27,16 +27,6 @@ All work is in Jupyter notebooks, written to run in Google Colab.
 | [`midterm-exam`](./midterm-exam) | Coding midterm (template plus two attempts) | ElasticNet, `ColumnTransformer`, grid search |
 | [`final-exam`](./final-exam) | Coding final exam | PCA, RBF SVM, grid search, decision region |
 
-### File naming
-
-Notebook names in each folder show what they are:
-
-- `*_problem.ipynb`: the assignment as handed out, with blanks to fill in.
-- `*_my_work.ipynb`: my own submission.
-- `*_solution.ipynb`: the instructor's posted solution, kept for reference.
-- `practice_*.ipynb`: in-class practice notebooks. `practice_13_my_work.ipynb` is my own copy of Practice 13.
-
-Some `*_my_work` files were originally named "Problem" because I worked directly in the handout notebook. Exercise 13 has only the instructor's solution so far.
 
 ## Assignments
 
@@ -132,17 +122,10 @@ In-class notebooks, numbered to match the class sessions. Practice 05 to 11 are 
 | `practice_20_pca_classification` | PCA pipeline on the Pima diabetes data. It reads `pima-indians-diabetes.csv`, which is not included here (see Datasets), and treats zeros in `plas`, `pres`, `skin`, `insu` and `mass` as missing values to impute with the median. |
 | `practice_21_k_means_clustering` | K-means clustering on the Wine dataset. |
 
-### Midterm Exam (Coding)
-**Purpose:** Build a complete regression pipeline with mixed feature types and tuned regularization.
-**Description:** On the UCI Student Performance dataset (fetched with `ucimlrepo`, 649 students, 14 selected features), predict the final grade `G3`. The task is to sort the features into ordinal, nominal and numeric groups, make a 90/10 development/test split (`random_state=2026`), and build a `ColumnTransformer` pipeline ending in `ElasticNet`. It then tunes `alpha` (0.001 to 10) and `l1_ratio` (0.1, 0.5, 0.9) with 6-fold `GridSearchCV` and reports development and test MSE. The notebook ends by saving a `grading_output.pkl` file for the grader.
+
 **Status of my attempt:** Incomplete. The feature-group lists and the data split are done, and the preprocessing pipeline was built. Remaining problems: `"M_job"` is a typo for `"Mjob"`, the ordinal encoder uses quality categories (`Po`, `Fa`, `TA`, `Gd`, `Ex`) from another dataset, and the grid-search cell has a syntax error and tunes the wrong parameter names. The MSE cells and the final save cell never run because they use undefined or empty variables.
 **Files:** `midterm_exam_template.ipynb` is the blank exam, `midterm_exam_my_attempt.ipynb` is my first attempt, and `midterm_exam_my_attempt_v2.ipynb` is a later attempt made from the same template. The later one is still incomplete: it has the same ordinal-encoder and `M_job` problems, the `param_grid` has a missing comma and uses `lasso__alpha`, it calls `.fit` on `param_grid`, and the last cell stops at half-written lines (`grid.best_piepline`, `dev_pred = grid.`).
 
-### Final Exam (Coding)
-**Purpose:** Combine dimensionality reduction, SVMs and model tuning on one dataset.
-**Description:** On the modified UCI Rice (Cammeo and Osmancik) dataset (3,810 samples, 7 features, with 100 missing values each in `Perimeter` and `Eccentricity`), reduce the features to two dimensions with PCA, train an RBF SVM, and tune `C` (0.1 to 100) and `gamma` (0.001 to 1) with 5-fold `GridSearchCV`. The exam then asks for a confusion matrix, a classification report and a decision-region plot. Grading ran the notebook cell by cell, so any error stopped the grading.
-**Files:** `final_exam_template.ipynb` is the blank exam, and `final_exam_my_attempt.ipynb` is my attempt.
-**Status of my attempt:** Incomplete. Task 1 puts the SVM inside the PCA pipeline and assigns the fitted pipeline to `X_train_2d` instead of the 2-D features. Task 2 searches over the number of PCA components with `cv=10` instead of the required `C` and `gamma` grid with `cv=5`, and the unfinished `svm_best_parameters =` line is a syntax error. Tasks 3 to 5 were not started.
 
 ## Datasets
 
